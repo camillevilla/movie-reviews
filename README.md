@@ -36,3 +36,17 @@ Jim Lengel
 
 ###MVP
 
+###Key Features
+
+- has users and authentication, some of whom are “trusted reviewers”
+- has a public list of films
+- each film has some reviews written only by trusted reviewers
+- films belong to categories
+- should be able to see the latest reviews, and the latest reviews by category
+- users should be able to rate and comment on reviews 
+- users should be able to rate and comment on films
+
+####Stretch Ideas
+- admin access for reviewers on comments left on their reviews
+- actors in films, and reviews for actors
+
