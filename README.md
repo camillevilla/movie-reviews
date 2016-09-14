@@ -1,4 +1,4 @@
-# movie-reviews
+# Cinemagic
 
 ###Team Name
 
