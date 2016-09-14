@@ -1,11 +1,11 @@
 # movie-reviews
 
-TEAM NAME
+##TEAM NAME
 
 Cinemagic
 
 
-TEAM MEMBERS
+##TEAM MEMBERS
 
 Camille Villa
 Blake Willis
@@ -13,7 +13,7 @@ Frank Aiello
 Jim Lengel
 
 
-USER STORIES
+##USER STORIES
 
 As a viewer, I want to search the movie database so that I can read reviews.
 As a viewer, I want to sort movies by their rating and see the number of stars per movie.
@@ -34,5 +34,5 @@ As an administrator, I want to have the same access as a trusted reviewer, as we
 As as administrator, I want to add movies so that users and reviewers can see more movies.
 
 
-MVP
+##MVP
 
