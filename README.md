@@ -47,7 +47,7 @@ coming soon
 - users should be able to rate and comment on reviews 
 - users should be able to rate and comment on films
 
-####Stretch Ideas
+###Stretch Ideas
 - admin access for reviewers on comments left on their reviews
 - actors in films, and reviews for actors
 
