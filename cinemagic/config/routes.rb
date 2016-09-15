@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   devise_for :models
 
-  # get 'sessions/new'
+  get 'sessions/new'
 
   get 'sessions/create'
 
