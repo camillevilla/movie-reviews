@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   get 'sessions/destroy'
   #This is movie index page
-  root 'movie#index'
+  root 'movies#index'
 
 end
 

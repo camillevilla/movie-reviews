@@ -1,5 +1,6 @@
-<h1>Movies</h1>
-
+<h1>Cinemagic</h1>
+<p>A reviews site for the discerning movie-goer.</p>
+<h2>Latest Reviews</h2>
 <ul>
 <% @movies.each do |movie| %>
   <li> <%= link_to movie.title, movie_path(movie) %> (<%= movie.reviews.length %> reviews) </li>
@@ -7,4 +8,16 @@
 </ul>
 
 <!-- Admin only -->
-<%= link_to "Add New Movie", new_movie_path %>
+<button><%= link_to "Add New Movie", new_movie_path %></button>
+
+<h2>Browse by Category</h2>
+<div class="card-columns">
+<% @genres.each do |genre| %>
+  <div class="card">
+    <div class="card-block">
+      <h3 class="card-title"><%= link_to genre.name.titlecase, genre_path(genre) %></h3>
+    </div>
+  </div>
+<% end %>
+</div>
+
