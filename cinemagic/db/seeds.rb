@@ -8,7 +8,7 @@ User.delete_all
 users = 100.times.map do
   User.create!( :username => Faker::Name.first_name,
                 :email      => Faker::Internet.email,
-                :password_hash   => 'password' )
+                :password   => 'sldkfjlksdj' )
 end
 
 
