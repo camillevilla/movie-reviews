@@ -1,9 +1,11 @@
 <h2><%= @genre.name.titlecase %></h2>
 
-<ul>
-  <% @movies.each do |movie| %>
-    <li><%= movie.title %></li>
+<% @movies.each do |movie| %>
+  <div class="card">
+    <div class="card-block">
+      <p class="card-title"><%= link_to movie.title, movie_path(movie) %></p>
+    </div>
+  </div>
   <% end %>
-</ul>
 
 
