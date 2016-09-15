@@ -1,0 +1,9 @@
+<h1> <%= @movie.title %> </h1>
+
+<ul>
+<% @movie.reviews.each do |review| %>
+  <li> <%= link_to review.text, movie_review_path(@movie, review) %> </li>
+<% end %>
+</ul>
+
+<%= link_to "Create New Review", new_movie_review_path(@movie) %>

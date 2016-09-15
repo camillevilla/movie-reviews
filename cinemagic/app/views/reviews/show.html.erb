@@ -1,0 +1,19 @@
+
+<nav>
+  <%= link_to @movie.title, movie_path(@movie) %>
+</nav>
+
+<h1> <%= @article.title %> </h1>
+
+<p> <%= @article.body %> </p>
+
+<p>Price: <%= @article.price %> </p>
+<p>Email: <%= @article.email %> </p>
+
+<%= image_tag(@article.picture, size: "400x400", alt: @article.picture) %>
+
+
+<div>
+  <%= link_to "edit", edit_category_article_path(@category, @article) %>
+  <%= link_to "delete", category_article_path(@category, @article), method: :delete %>
+</div>
