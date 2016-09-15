@@ -1,3 +1,6 @@
+
+
+
 <h2><%= @movie.title %></h2>
 <h3>Overall rating: </h3>
   <!-- some class method call to determine rating -->
@@ -32,5 +35,8 @@
 <% else %>
   <p>This movie hasn't been reviewed yet.</p>
   <!-- debug path later -->
-  <%= link_to 'Add a Review' %>
+
+
 <% end %>
+
+<%= link_to "Create New Review", new_movie_review_path(@movie) %>
