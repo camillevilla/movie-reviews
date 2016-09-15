@@ -1,3 +1,4 @@
+<h1>Add a Review</h1>
 <%= form_for [@movie, @movie.reviews.build], url: {action: "create"} do |f| %>
   <p>
     <%= f.label :text %><br>

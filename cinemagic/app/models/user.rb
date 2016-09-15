@@ -5,4 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :reviews
   has_many :comments
-end 
+
+  def trusted_user_ranking
+    upvote_array = self.reviews.map(&:up_vote_sum)
+    upvotes_array.reduce(:+)
+  end
+
+end
+
