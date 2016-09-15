@@ -2,6 +2,7 @@ class MoviesController < ApplicationController
 # Changed movie controller to singular
   def index
     @movies = Movie.all
+    @genres = Genre.all
   end
 
   def new
