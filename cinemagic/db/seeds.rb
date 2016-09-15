@@ -17,24 +17,27 @@ users = 100.times.map do
                 :password   => 'password' )
 end
 
-# movies = ["Unforgiven", "The Lion King", "50 Shades of Gray", "Legally Blonde",
-#  "Saving Private Ryan", "Finding Nemo", "Young Frankenstein", "", "Nickelodeon"].map do |name|
- 
 
 #   Channel.create!(:name            => name,
 #                   :callsign        => name[0..2].upcase,
 #                   :price_per_month => Faker::Commerce.price)
 # end
 
-action_movies = ["Ben-Hur", "Jason Bourne", "Now You See Me", "Fast and the Furious"]
-comedy_movies = ["Young Frankenstein", "Ghostbusters", "The Hangover", "Sausage Party"]
-romantic_movies = [""]
+# action_movies = ["Ben-Hur", "Jason Bourne", "Now You See Me", "Fast and the Furious"]
+# comedy_movies = ["Young Frankenstein", "Ghostbusters", "The Hangover", "Sausage Party"]
+# romantic_movies = ["The Notebook", "When Harry Met Sally", "50 First Dates", "Hitch", "Crazy Stupid Love"]
+# drama_movies = ["Titanic", "The Dark Knight", "Good Will Hunting", "The Shawshank Redemption"]
+# horror_movies = ["The Conjuring", "The Ring", "The Exorcist", "The Mist", "Scream"]
+# western_movies = ["Unforgiven", "Dances With Wolves", "The Good, the bad, and the Ugly", "Tombstone"]
 
-users.each do |user|
-  user_channels = channels.sample(rand(2..4))
-  user_channels.each do |channel|
-    Subscription.create!(user: user,
-                         channel: channel)
-  end
-end
-Contact GitHub API Training Shop Blog About
+
+
+
+# users.each do |user|
+#   user_channels = channels.sample(rand(2..4))
+#   user_channels.each do |channel|
+#     Subscription.create!(user: user,
+#                          channel: channel)
+#   end
+# end
+# Contact GitHub API Training Shop Blog About
