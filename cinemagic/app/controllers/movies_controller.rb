@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-
+# Changed movie controller to singular
   def index
     @movies = Movie.all
   end
