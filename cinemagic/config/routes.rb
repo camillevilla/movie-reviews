@@ -5,15 +5,20 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  resources :genres
+
+  devise_for :models
+
   get 'sessions/new'
 
   get 'sessions/create'
 
   get 'sessions/destroy'
   #This is movie index page
+
+  root 'movies#index'
+
   # root 'movie#index'
-  root :to =>'movies#index'
-  # root 'sessions#new'
 
 end
 
