@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160914232857) do
+ActiveRecord::Schema.define(version: 20160915190155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "assignedgenres", force: :cascade do |t|
+    t.integer "genre_id"
+    t.integer "movie_id"
+    t.index ["genre_id"], name: "index_assignedgenres_on_genre_id", using: :btree
+    t.index ["movie_id"], name: "index_assignedgenres_on_movie_id", using: :btree
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text    "text"
@@ -54,7 +61,8 @@ ActiveRecord::Schema.define(version: 20160914232857) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
     t.integer "movie_id"
-    t.integer "star_rating"
+    t.string  "star_rating"
+    t.string  "integer"
     t.text    "text"
     t.index ["movie_id"], name: "index_reviews_on_movie_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree
