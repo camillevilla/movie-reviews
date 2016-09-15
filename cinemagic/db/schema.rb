@@ -74,7 +74,8 @@ ActiveRecord::Schema.define(version: 20160915190155) do
   end
 
   create_table "votes", force: :cascade do |t|
-    t.integer "vote_value"
+    t.integer "up_vote_value",   default: 0
+    t.integer "down_vote_value", default: 0
     t.integer "user_id"
     t.integer "review_id"
     t.index ["review_id"], name: "index_votes_on_review_id", using: :btree
@@ -82,5 +83,4 @@ ActiveRecord::Schema.define(version: 20160915190155) do
   end
 
   add_foreign_key "comments", "users"
-  add_foreign_key "votes", "reviews"
 end

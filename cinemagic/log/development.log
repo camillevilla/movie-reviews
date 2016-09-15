@@ -2384,3 +2384,1597 @@ Processing by MoviesController#show as HTML
 Completed 200 OK in 36ms (Views: 32.3ms | ActiveRecord: 0.6ms)
 
 
+Started GET "/movies/1" for ::1 at 2016-09-15 15:02:59 -0700
+Processing by MoviesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mMovie Load (0.3ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering movies/show.html.erb within layouts/application
+  [1m[36mReview Load (0.3ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews" WHERE "reviews"."movie_id" = $1[0m  [["movie_id", 1]]
+  Rendered movies/show.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 34ms (Views: 29.9ms | ActiveRecord: 0.6ms)
+
+
+  [1m[36mVote Load (0.8ms)[0m  [1m[34mSELECT "votes".* FROM "votes"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (177.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "cinemagic_development"[0m
+  [1m[35m (176.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "cinemagic_test"[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1413872719350627060);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateMovies (20160914225914)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "movies" ("id" serial primary key, "title" character varying, "year" integer, "director" character varying, "mpaa_rating" integer)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914225914"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20160914230001)
+  [1m[35m (15.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (13.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "email" character varying, "password_hash" character varying)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230001"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGenres (20160914230107)
+  [1m[35m (31.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "genres" ("id" serial primary key, "name" character varying)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230107"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20160914230156)
+  [1m[35m (14.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" serial primary key, "user_id" integer, "movie_id" integer, "star_rating" integer, "text" text)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_reviews_on_user_id" ON "reviews"  ("user_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_reviews_on_movie_id" ON "reviews"  ("movie_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230156"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20160914230230)
+  [1m[35m (15.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (19.3ms)[0m  [1m[35mCREATE TABLE "comments" ("id" serial primary key, "text" text, "review_id" integer, "user_id" integer, CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_review_id" ON "comments"  ("review_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230230"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateVotes (20160914230250)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "votes" ("id" serial primary key, "vote_value" integer DEFAULT 0, "user_id" integer, "review_id" integer, CONSTRAINT "fk_rails_cff9269b16"
+FOREIGN KEY ("review_id")
+  REFERENCES "reviews" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_user_id" ON "votes"  ("user_id")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_review_id" ON "votes"  ("review_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230250"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseCreateModels (20160914232857)
+  [1m[35m (15.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "models" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_models_on_email" ON "models"  ("email")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_models_on_reset_password_token" ON "models"  ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914232857"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAssignedgenre (20160915190155)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "assignedgenres" ("id" serial primary key, "genre_id" integer, "movie_id" integer)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_assignedgenres_on_genre_id" ON "assignedgenres"  ("genre_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_assignedgenres_on_movie_id" ON "assignedgenres"  ("movie_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160915190155"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.5ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-09-15 22:17:58 UTC], ["updated_at", 2016-09-15 22:17:58 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1413872719350627060)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (3.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'assignedgenres'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'comments'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'genres'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'models'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'movies'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'reviews'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'votes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Macey"], ["email", "elvie@wolff.com"], ["password_hash", "password"]]
+  [1m[35m (23.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jakob"], ["email", "crystal@barrows.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Gaston"], ["email", "reynold_halvorson@colecrona.name"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Howard"], ["email", "katlyn@gutkowskibernhard.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ed"], ["email", "toni.price@damorereilly.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Destany"], ["email", "bertrand.walter@goldnerfranecki.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Stanley"], ["email", "amir@purdy.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Citlalli"], ["email", "jonathan.schuster@botsfordwillms.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Pauline"], ["email", "cooper@huel.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Aryanna"], ["email", "crawford@heathcote.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "German"], ["email", "dandre_jacobson@bogisichberge.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dejon"], ["email", "darby.padberg@lubowitz.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Waldo"], ["email", "noble@miller.co"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jana"], ["email", "oceane@herman.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Alyson"], ["email", "lilla@raugleason.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Itzel"], ["email", "dana@anderson.name"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rhiannon"], ["email", "etha_rohan@feeney.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kirk"], ["email", "carlo.kirlin@pollichrunolfsdottir.net"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Frederick"], ["email", "nella@gorczanybarrows.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dorcas"], ["email", "jamir_marks@konopelski.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jasmin"], ["email", "donald.nienow@stehrquitzon.co"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Angel"], ["email", "keenan@ullrich.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jocelyn"], ["email", "linda@hudson.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Fatima"], ["email", "eloise_heaney@funkmiller.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jody"], ["email", "emmalee_dickens@brownkeebler.org"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Irma"], ["email", "suzanne.price@erdmanbaumbach.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jasper"], ["email", "julian@stehrconsidine.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "D'angelo"], ["email", "bulah.johns@braun.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Payton"], ["email", "effie@lynchgleichner.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Bernadine"], ["email", "tyrell@jacobs.io"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ashton"], ["email", "cecilia@steubersanford.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rebeka"], ["email", "cortney@runolfsdottirkovacek.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Antone"], ["email", "kaylee_treutel@cruickshankmacejkovic.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ansel"], ["email", "vince_robel@little.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Camryn"], ["email", "santina_conn@daniel.org"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Lilly"], ["email", "omer@feil.biz"], ["password_hash", "password"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dannie"], ["email", "gabriel_douglas@zemlak.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Alyce"], ["email", "durward.ryan@cole.biz"], ["password_hash", "password"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rosanna"], ["email", "kenyatta@rosenbaum.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Alvena"], ["email", "raegan.boyle@kunderosenbaum.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Einar"], ["email", "gay@kertzmann.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Keira"], ["email", "jocelyn_bosco@vandervort.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Sigmund"], ["email", "craig@towne.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Tatum"], ["email", "lillian_eichmann@oconnell.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Zola"], ["email", "roxanne@kub.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jacquelyn"], ["email", "baby@greenmarks.net"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kyler"], ["email", "arnoldo.fritsch@gottlieb.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dudley"], ["email", "cristal_lueilwitz@zulaufpagac.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Horace"], ["email", "maybell@schoen.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rodger"], ["email", "lee@rodriguez.info"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Demarcus"], ["email", "wilson.mraz@schmitt.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Alfonzo"], ["email", "breana@abshirehayes.org"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Marquise"], ["email", "monte.turner@flatley.io"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Trevor"], ["email", "rudy_crona@creminwalsh.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Blanche"], ["email", "addison@streich.name"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rocio"], ["email", "amelie_collier@bradtke.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Clara"], ["email", "gladyce_kautzer@huel.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Bertrand"], ["email", "willy@thompson.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Alessia"], ["email", "georgiana@mcdermott.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Vito"], ["email", "javon.stiedemann@pfeffer.info"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Eleonore"], ["email", "electa@monahan.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Gia"], ["email", "ulises@quitzon.co"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jayde"], ["email", "ryann@ullrichbrekke.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Brionna"], ["email", "timothy_nienow@kuphal.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Tate"], ["email", "clarabelle_bode@champlin.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dovie"], ["email", "alycia.keeling@stokeshaley.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ulices"], ["email", "joanny@zulauf.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Sid"], ["email", "madge@damorepadberg.biz"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jermaine"], ["email", "robert.klein@shanahan.biz"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Valentin"], ["email", "monte_king@lowe.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Trycia"], ["email", "lenore_emard@rodriguez.biz"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Erin"], ["email", "cecelia@bruen.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rupert"], ["email", "sabrina@kerluke.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Alexane"], ["email", "berniece.becker@sengerprice.biz"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Mauricio"], ["email", "matilde_simonis@collins.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Gust"], ["email", "rhett@oconnell.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Tiana"], ["email", "abe@rath.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Abbey"], ["email", "dalton_denesik@wuckertschultz.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Vada"], ["email", "eliezer@jacobsonbarrows.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Clare"], ["email", "lucio.torp@cristkihn.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Claude"], ["email", "vince@dietrichbrown.org"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Providenci"], ["email", "joe@hane.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Elda"], ["email", "annabelle.breitenberg@schoen.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Gardner"], ["email", "mariam.macejkovic@kovacek.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Vito"], ["email", "jacklyn_jaskolski@erdman.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ruby"], ["email", "else@fahey.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jalyn"], ["email", "presley@collier.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Xavier"], ["email", "darius@schamberger.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jovanny"], ["email", "leila@funk.io"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Thad"], ["email", "abdiel.kertzmann@luettgenmcclure.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jackson"], ["email", "jamar@murray.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Sedrick"], ["email", "vito@huels.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rowan"], ["email", "dianna@nolanbrekke.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Gust"], ["email", "christelle.lynch@jast.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Albertha"], ["email", "winfield@johnsonconsidine.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Janae"], ["email", "valentine_sauer@ziemegleichner.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Josiane"], ["email", "verona@toy.name"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Lina"], ["email", "marcelo@macgyverstroman.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rita"], ["email", "mason.reinger@hartmann.co"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jocelyn"], ["email", "jammie@harvey.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "action"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "comedy"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "romantic"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "drama"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "horror"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "western"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "All Watched Over by Machines of Loving Grace pt 2: The Use and Abuse of Vegetational Concepts"], ["year", 2011], ["director", "Adam Curtis"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director", "mpaa_rating") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Children of Men"], ["year", 2006], ["director", "Alfonso Cuarón"], ["mpaa_rating", 0]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "A Trip to the Moon"], ["year", 1902], ["director", "Georges Méliès"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director", "mpaa_rating") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "This is Spinal Tap"], ["year", 1984], ["director", "Rob Reiner"], ["mpaa_rating", 0]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Xala"], ["year", 1975], ["director", "Ousmane Sembène"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mVote Load (0.8ms)[0m  [1m[34mSELECT "votes".* FROM "votes"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (126.1ms)[0m  [1m[35mDROP DATABASE IF EXISTS "cinemagic_development"[0m
+  [1m[35m (121.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "cinemagic_test"[0m
+  [1m[35m (326.4ms)[0m  [1m[35mCREATE DATABASE "cinemagic_development" ENCODING = 'unicode'[0m
+  [1m[35m (295.7ms)[0m  [1m[35mCREATE DATABASE "cinemagic_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1413872719350627060);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateMovies (20160914225914)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.5ms)[0m  [1m[35mCREATE TABLE "movies" ("id" serial primary key, "title" character varying, "year" integer, "director" character varying, "mpaa_rating" integer)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914225914"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20160914230001)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "email" character varying, "password_hash" character varying)[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230001"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGenres (20160914230107)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "genres" ("id" serial primary key, "name" character varying)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230107"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20160914230156)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" serial primary key, "user_id" integer, "movie_id" integer, "star_rating" integer, "text" text)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_reviews_on_user_id" ON "reviews"  ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_reviews_on_movie_id" ON "reviews"  ("movie_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230156"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20160914230230)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (38.3ms)[0m  [1m[35mCREATE TABLE "comments" ("id" serial primary key, "text" text, "review_id" integer, "user_id" integer, CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_review_id" ON "comments"  ("review_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230230"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateVotes (20160914230250)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (5.7ms)[0m  [1m[35mCREATE TABLE "votes" ("id" serial primary key, "up_vote_value" integer DEFAULT 0, "down_vote_value" integer DEFAULT 0, "user_id" integer, "review_id" integer, CONSTRAINT "fk_rails_cff9269b16"
+FOREIGN KEY ("review_id")
+  REFERENCES "reviews" ("id")
+)[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_user_id" ON "votes"  ("user_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_review_id" ON "votes"  ("review_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230250"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseCreateModels (20160914232857)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (6.0ms)[0m  [1m[35mCREATE TABLE "models" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_models_on_email" ON "models"  ("email")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_models_on_reset_password_token" ON "models"  ("reset_password_token")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914232857"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAssignedgenre (20160915190155)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "assignedgenres" ("id" serial primary key, "genre_id" integer, "movie_id" integer)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_assignedgenres_on_genre_id" ON "assignedgenres"  ("genre_id")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE  INDEX  "index_assignedgenres_on_movie_id" ON "assignedgenres"  ("movie_id")[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160915190155"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-09-15 22:22:22 UTC], ["updated_at", 2016-09-15 22:22:22 UTC]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(1413872719350627060)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (3.2ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'assignedgenres'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.7ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'comments'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'genres'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'models'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'movies'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'reviews'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.6ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.5ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'votes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kaylie"], ["email", "orlo.greenholt@windler.com"], ["password_hash", "password"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Merl"], ["email", "mustafa_bosco@brekke.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jarod"], ["email", "marshall@daugherty.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Eleanore"], ["email", "colt@yundt.org"], ["password_hash", "password"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Norbert"], ["email", "gwen@hagenes.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Marina"], ["email", "treie.raynor@leannon.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Nick"], ["email", "lilla_keebler@greenholthermann.co"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Yasmin"], ["email", "minerva@murazikdurgan.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Craig"], ["email", "shaylee@klein.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dortha"], ["email", "jey.carroll@hane.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ethel"], ["email", "kariane@weimann.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Christophe"], ["email", "walter_vandervort@borer.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Judah"], ["email", "michelle@weber.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Sadie"], ["email", "beau.stracke@weber.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Cora"], ["email", "anabel_jaskolski@jenkins.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Viviane"], ["email", "urban@wolff.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kennedi"], ["email", "dedric_hirthe@lueilwitz.biz"], ["password_hash", "password"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Mellie"], ["email", "tamia@ruecker.info"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Moshe"], ["email", "roslyn_collier@kuvalisgerlach.net"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Tara"], ["email", "tyrel@murphymitchell.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Laila"], ["email", "karlie_predovic@cainhyatt.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Tyler"], ["email", "jana_harvey@baumbachbayer.biz"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Trudie"], ["email", "lyla@metz.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kenna"], ["email", "cristopher.mosciski@terry.io"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Millie"], ["email", "regan@kuhnheidenreich.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rosemarie"], ["email", "piper@robertsvonrueden.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Judah"], ["email", "bernardo.keebler@leuschketillman.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Karianne"], ["email", "german@cremin.co"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Cristina"], ["email", "karen.bergstrom@schinnerdubuque.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Berry"], ["email", "nash.hilll@croninlebsack.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dakota"], ["email", "electa@wuckerthand.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Destany"], ["email", "juvenal@romagueralemke.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jamie"], ["email", "ramona.kreiger@grady.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Marc"], ["email", "casey.heidenreich@weimann.io"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Daphne"], ["email", "kayden@frami.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Mckenna"], ["email", "vida@thompson.co"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dagmar"], ["email", "murray@baileylesch.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Donald"], ["email", "sydney@goyette.name"], ["password_hash", "password"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Zetta"], ["email", "dillan@mills.org"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Junior"], ["email", "sister@price.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Payton"], ["email", "kailey_herman@wiegand.name"], ["password_hash", "password"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Emerald"], ["email", "mariane@paucek.org"], ["password_hash", "password"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Andres"], ["email", "jayde@wiza.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Brain"], ["email", "pasquale@cristhyatt.org"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Melisa"], ["email", "opal.watsica@hintz.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Sigurd"], ["email", "flavie.haag@halvorsonmoen.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kaitlyn"], ["email", "delia@davis.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Casper"], ["email", "grayson_bergstrom@greenholt.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Destini"], ["email", "clement_legros@bahringer.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rickie"], ["email", "maureen_okuneva@steuberoconner.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Janae"], ["email", "joseph@stokes.name"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Layla"], ["email", "fred.rohan@corwin.co"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Guido"], ["email", "rosamond_medhurst@dickinson.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Seth"], ["email", "mya@sporerkuphal.biz"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Okey"], ["email", "laney.fritsch@robel.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Giovanny"], ["email", "quinten@bins.org"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Johan"], ["email", "irving@schultzankunding.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Vivienne"], ["email", "ulises@gutmannbrekke.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Durward"], ["email", "marcella@gulgowskieffertz.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jayce"], ["email", "devon_white@sporer.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Maximus"], ["email", "augustus@oconnerzboncak.biz"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Eldridge"], ["email", "odell@kohler.co"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Aniya"], ["email", "scotty@parisian.info"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Drake"], ["email", "mikayla.okuneva@davis.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Assunta"], ["email", "gianni@moore.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jayne"], ["email", "adella@jacobsonchristiansen.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Angus"], ["email", "viviane_towne@greenholt.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Chadd"], ["email", "glennie_lowe@corwin.org"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Laurianne"], ["email", "robyn_lebsack@macgyver.com"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kamille"], ["email", "lyda_gleason@rippinwolf.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Paolo"], ["email", "skylar.collins@veum.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Conrad"], ["email", "courtney@connelly.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Elizabeth"], ["email", "stephon_bednar@oconnell.com"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Chaim"], ["email", "maria@carter.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Era"], ["email", "kody_runolfon@cronaboehm.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Angela"], ["email", "mayra@heathcote.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jonathan"], ["email", "otha@goyette.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rachel"], ["email", "ena@ullrich.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Audie"], ["email", "madisen_kuhlman@funk.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Rafael"], ["email", "elliott.stroman@jonesdach.com"], ["password_hash", "password"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jordyn"], ["email", "kyla@crona.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Zena"], ["email", "ransom_hayes@brekkeharber.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jannie"], ["email", "braxton_white@auerfritsch.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Roberto"], ["email", "mckenzie@heathcote.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Zelda"], ["email", "charlie_sanford@kling.name"], ["password_hash", "password"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Edmond"], ["email", "jeika@braunschaefer.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Nasir"], ["email", "hal@brown.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Cecil"], ["email", "brandon@mueller.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Bill"], ["email", "keeley.stroman@vonrueden.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Leonard"], ["email", "marianne_schinner@gislason.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ron"], ["email", "nakia@johns.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kiley"], ["email", "teagan@emard.biz"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Natasha"], ["email", "jovan@bosco.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ali"], ["email", "isobel_labadie@dubuquebeatty.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ronny"], ["email", "gabe@creminberge.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Roger"], ["email", "kavon@kulas.info"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Carter"], ["email", "friedrich@rowe.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Brendon"], ["email", "irving@framigaylord.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Hazle"], ["email", "garrison_thiel@corkery.biz"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jaylen"], ["email", "anderson@donnellyhackett.com"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "action"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "comedy"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "romantic"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "drama"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "horror"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "western"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "All Watched Over by Machines of Loving Grace pt 2: The Use and Abuse of Vegetational Concepts"], ["year", 2011], ["director", "Adam Curtis"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director", "mpaa_rating") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Children of Men"], ["year", 2006], ["director", "Alfonso Cuarón"], ["mpaa_rating", 0]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "A Trip to the Moon"], ["year", 1902], ["director", "Georges Méliès"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director", "mpaa_rating") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "This is Spinal Tap"], ["year", 1984], ["director", "Rob Reiner"], ["mpaa_rating", 0]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Xala"], ["year", 1975], ["director", "Ousmane Sembène"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mVote Load (0.8ms)[0m  [1m[34mSELECT "votes".* FROM "votes"[0m
+  [1m[36mVote Load (0.7ms)[0m  [1m[34mSELECT "votes".* FROM "votes"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mReview Load (0.8ms)[0m  [1m[34mSELECT "reviews".* FROM "reviews"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMovie Load (0.4ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "reviews" ("user_id", "movie_id") VALUES ($1, $2) RETURNING "id"[0m  [["user_id", 1], ["movie_id", 1]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", :environment]]
+  [1m[35m (126.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "cinemagic_development"[0m
+  [1m[35m (122.7ms)[0m  [1m[35mDROP DATABASE IF EXISTS "cinemagic_test"[0m
+  [1m[35m (334.1ms)[0m  [1m[35mCREATE DATABASE "cinemagic_development" ENCODING = 'unicode'[0m
+  [1m[35m (343.2ms)[0m  [1m[35mCREATE DATABASE "cinemagic_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying PRIMARY KEY)[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(1413872719350627060);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateMovies (20160914225914)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.4ms)[0m  [1m[35mCREATE TABLE "movies" ("id" serial primary key, "title" character varying, "year" integer, "director" character varying, "mpaa_rating" integer)[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914225914"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateUsers (20160914230001)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" serial primary key, "username" character varying, "email" character varying, "password_hash" character varying)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230001"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateGenres (20160914230107)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.3ms)[0m  [1m[35mCREATE TABLE "genres" ("id" serial primary key, "name" character varying)[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230107"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateReviews (20160914230156)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "reviews" ("id" serial primary key, "user_id" integer, "movie_id" integer, "star_rating" integer, "text" text)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_reviews_on_user_id" ON "reviews"  ("user_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_reviews_on_movie_id" ON "reviews"  ("movie_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230156"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateComments (20160914230230)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "comments" ("id" serial primary key, "text" text, "review_id" integer, "user_id" integer, CONSTRAINT "fk_rails_03de2dc08c"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_review_id" ON "comments"  ("review_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_comments_on_user_id" ON "comments"  ("user_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230230"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateVotes (20160914230250)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "votes" ("id" serial primary key, "up_vote_value" integer DEFAULT 0, "down_vote_value" integer DEFAULT 0, "user_id" integer, "review_id" integer)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_user_id" ON "votes"  ("user_id")[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_votes_on_review_id" ON "votes"  ("review_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914230250"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+Migrating to DeviseCreateModels (20160914232857)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "models" ("id" serial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" timestamp, "last_sign_in_at" timestamp, "current_sign_in_ip" inet, "last_sign_in_ip" inet, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_models_on_email" ON "models"  ("email")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_models_on_reset_password_token" ON "models"  ("reset_password_token")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160914232857"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateAssignedgenre (20160915190155)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "assignedgenres" ("id" serial primary key, "genre_id" integer, "movie_id" integer)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_assignedgenres_on_genre_id" ON "assignedgenres"  ("genre_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_assignedgenres_on_movie_id" ON "assignedgenres"  ("movie_id")[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20160915190155"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", :environment], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", 2016-09-15 22:47:00 UTC], ["updated_at", 2016-09-15 22:47:00 UTC]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(1413872719350627060)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (2.4ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'assignedgenres'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'comments'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'genres'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'models'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'movies'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.3ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'reviews'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'users'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'votes'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Bart"], ["email", "alfonso_carter@schowalter.net"], ["password_hash", "password"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Hulda"], ["email", "alfonso_bogisich@bahringer.info"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kelsi"], ["email", "reid@jacobsturcotte.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Brown"], ["email", "chaz.keebler@weberlueilwitz.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Isabelle"], ["email", "philip@blick.name"], ["password_hash", "password"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Estella"], ["email", "reanna.schaefer@stamm.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Thaddeus"], ["email", "conrad_hermiston@becker.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Serena"], ["email", "magnolia@trompcorkery.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Brielle"], ["email", "jeramy_olson@nicolas.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Estella"], ["email", "jameson_turcotte@auerjast.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Lorine"], ["email", "lowell_heller@pacocha.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jessyca"], ["email", "giovanny.johnston@willms.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Moses"], ["email", "kelvin_schmeler@beahan.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Leanna"], ["email", "eldon@gottlieb.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dana"], ["email", "paris_sporer@willms.biz"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kieran"], ["email", "keshawn.macejkovic@schinner.biz"], ["password_hash", "password"]]
+  [1m[35m (22.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Lesly"], ["email", "josefa@hintz.org"], ["password_hash", "password"]]
+  [1m[35m (30.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Trisha"], ["email", "rose@feil.org"], ["password_hash", "password"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kaitlyn"], ["email", "ruel@dickinson.com"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Florian"], ["email", "sallie@grantkihn.com"], ["password_hash", "password"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Carol"], ["email", "davonte@rogahnstrosin.co"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kailee"], ["email", "rodrick@corwin.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Maybell"], ["email", "chyna@grimes.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Monserrat"], ["email", "maxine@turcotte.co"], ["password_hash", "password"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Roger"], ["email", "lavon_schimmel@waelchistanton.biz"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kendrick"], ["email", "dario_romaguera@hegmann.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Michael"], ["email", "celestine.oconner@hickle.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Van"], ["email", "janie@reichert.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Judge"], ["email", "dagmar@heller.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Sydnee"], ["email", "kale@connellymccullough.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Deangelo"], ["email", "alfreda_torp@predovic.net"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Clyde"], ["email", "magdalen@kunzewilkinson.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Theron"], ["email", "gabrielle.reichel@schinnerrice.net"], ["password_hash", "password"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ivory"], ["email", "cade@hermiston.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Noemie"], ["email", "alexane.stanton@windler.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Meghan"], ["email", "earline_walsh@ward.biz"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ursula"], ["email", "guiseppe@stark.net"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Liza"], ["email", "alycia.kling@cremingrady.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jacklyn"], ["email", "german@schuppe.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Bertram"], ["email", "frederic@prosacco.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Zackary"], ["email", "taryn_wilderman@kris.net"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ernie"], ["email", "colleen@bode.org"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Wilhelmine"], ["email", "alexandrea@brakus.biz"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Woodrow"], ["email", "lelia.von@bernhardpredovic.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Myrtice"], ["email", "rosario.schroeder@skiles.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kaylah"], ["email", "marta.marks@schillerframi.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Hilda"], ["email", "humberto@mann.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Eladio"], ["email", "sharon.hand@dubuque.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Frederic"], ["email", "marcelle_herman@labadie.com"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Nico"], ["email", "percy@doyle.org"], ["password_hash", "password"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Scottie"], ["email", "jonathon@oreillydamore.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Monserrat"], ["email", "ila@witting.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Marietta"], ["email", "norval.buckridge@beahancollins.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Major"], ["email", "jamel.nikolaus@schowalter.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Estelle"], ["email", "lamar.herman@schowalterhermann.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Eulah"], ["email", "bella@mckenzie.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ashley"], ["email", "ollie_weimann@barton.name"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Viva"], ["email", "titus_jast@moenlebsack.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Taya"], ["email", "melba@stanton.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Damion"], ["email", "charlie.runolfsdottir@beahan.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Adaline"], ["email", "dakota@bailey.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Alexys"], ["email", "jamil.legros@collier.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jayne"], ["email", "madge.nicolas@fadel.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Garry"], ["email", "tanner@volkman.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Lexi"], ["email", "bria.sawayn@hand.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Emelia"], ["email", "wilson_bahringer@hammes.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Adolf"], ["email", "sammy_swaniawski@stehr.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Santina"], ["email", "modesto.brown@collinskertzmann.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Talia"], ["email", "tyler.ziemann@kilbackfranecki.biz"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Sigurd"], ["email", "karine@franecki.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "D'angelo"], ["email", "freeman@koelpin.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Milford"], ["email", "federico@ledner.com"], ["password_hash", "password"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Gladys"], ["email", "jamil@schummdurgan.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Mabel"], ["email", "dasia.leuschke@waelchireichert.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Brooks"], ["email", "pinkie.konopelski@mcglynn.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Edythe"], ["email", "lisandro@pfannerstill.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Cydney"], ["email", "jamarcus.hoeger@rowe.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ron"], ["email", "wilber.kuhlman@shanahan.org"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Theodora"], ["email", "diego@kunde.co"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Shemar"], ["email", "helena_rice@morar.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Cortney"], ["email", "lamar_christiansen@greenholtlubowitz.biz"], ["password_hash", "password"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Kaelyn"], ["email", "neha.hilll@wisozkrunolfsdottir.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Leanna"], ["email", "concepcion@schoen.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Brandy"], ["email", "kian@walsh.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jaden"], ["email", "general@reichel.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Margret"], ["email", "delaney_leannon@balistreri.com"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Dana"], ["email", "sedrick@hayes.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Horace"], ["email", "owen.dietrich@jacobi.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Jayne"], ["email", "kathleen@sporerhalvorson.net"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Lela"], ["email", "jerad@rempel.info"], ["password_hash", "password"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Josefina"], ["email", "lora_weimann@klockomayert.io"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Ashly"], ["email", "mya@goodwin.info"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Soledad"], ["email", "josephine@olson.biz"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Casimer"], ["email", "christelle.rau@daugherty.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "London"], ["email", "laney@stehrernser.co"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Heber"], ["email", "lesly_runolfon@leannon.info"], ["password_hash", "password"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Arno"], ["email", "vern.reichert@bernier.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Cassie"], ["email", "elian@berniergreen.name"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Norval"], ["email", "aracely@osinskikulas.org"], ["password_hash", "password"]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_hash") VALUES ($1, $2, $3) RETURNING "id"[0m  [["username", "Broderick"], ["email", "soledad.batz@bashirian.co"], ["password_hash", "password"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "action"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "comedy"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "romantic"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "drama"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "horror"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "genres" ("name") VALUES ($1) RETURNING "id"[0m  [["name", "western"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "All Watched Over by Machines of Loving Grace pt 2: The Use and Abuse of Vegetational Concepts"], ["year", 2011], ["director", "Adam Curtis"]]
+  [1m[35m (15.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director", "mpaa_rating") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "Children of Men"], ["year", 2006], ["director", "Alfonso Cuarón"], ["mpaa_rating", 0]]
+  [1m[35m (20.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "A Trip to the Moon"], ["year", 1902], ["director", "Georges Méliès"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director", "mpaa_rating") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["title", "This is Spinal Tap"], ["year", 1984], ["director", "Rob Reiner"], ["mpaa_rating", 0]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "movies" ("title", "year", "director") VALUES ($1, $2, $3) RETURNING "id"[0m  [["title", "Xala"], ["year", 1975], ["director", "Ousmane Sembène"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMovie Load (0.6ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (1.7ms)[0m  [1m[32mINSERT INTO "reviews" ("user_id", "movie_id", "star_rating", "text") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["movie_id", 1], ["star_rating", 3], ["text", "A couple words"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mVote Load (0.8ms)[0m  [1m[34mSELECT  "votes".* FROM "votes" ORDER BY "votes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mReview Load (0.5ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "votes" ("user_id", "review_id") VALUES ($1, $2) RETURNING "id"[0m  [["user_id", 1], ["review_id", 1]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mReview Load (0.2ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" WHERE "reviews"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "votes" ("user_id", "review_id") VALUES ($1, $2) RETURNING "id"[0m  [["user_id", 1], ["review_id", 1]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMovie Load (0.4ms)[0m  [1m[34mSELECT  "movies".* FROM "movies" WHERE "movies"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "reviews" ("user_id", "movie_id", "star_rating", "text") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["user_id", 1], ["movie_id", 1], ["star_rating", 3], ["text", "It was good"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "votes" SET "review_id" = $1 WHERE "votes"."id" = $2[0m  [["review_id", 2], ["id", 1]]
+  [1m[35m (36.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mVote Load (0.3ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."review_id" = $1[0m  [["review_id", 2]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "votes" SET "review_id" = $1 WHERE "votes"."id" = $2[0m  [["review_id", 2], ["id", 2]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mVote Load (0.6ms)[0m  [1m[34mSELECT "votes".* FROM "votes"[0m
+  [1m[36mVote Load (0.4ms)[0m  [1m[34mSELECT  "votes".* FROM "votes" ORDER BY "votes"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mVote Load (0.4ms)[0m  [1m[34mSELECT  "votes".* FROM "votes" ORDER BY "votes"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mReview Load (0.4ms)[0m  [1m[34mSELECT  "reviews".* FROM "reviews" ORDER BY "reviews"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "votes" SET "review_id" = $1 WHERE "votes"."id" = $2[0m  [["review_id", 1], ["id", 1]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mVote Load (0.9ms)[0m  [1m[34mSELECT "votes".* FROM "votes" WHERE "votes"."review_id" = $1[0m  [["review_id", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "votes" SET "review_id" = $1 WHERE "votes"."id" = $2[0m  [["review_id", 1], ["id", 2]]
+  [1m[35m (16.7ms)[0m  [1m[35mCOMMIT[0m
