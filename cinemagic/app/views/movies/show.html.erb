@@ -1,0 +1,42 @@
+
+
+
+<h2><%= @movie.title %></h2>
+<h3>Overall rating: </h3>
+  <!-- some class method call to determine rating -->
+<h3>Movie details</h3>
+<ul>
+<li>Release year: <%= @movie.year %></li>
+<li>Director: <%= @movie.director %></li>
+<!-- MPAA ratings usually missing for older movies -->
+<li>MPAA rating:
+<% if @movie.mpaa_rating != nil %>
+  <%= @movie.mpaa_rating %>
+<% else %>
+  <p>No rating available</p>
+<%end %></li>
+
+
+
+<!-- ooh maybe the number of reviews -->
+<h3>Reviews</h3>
+<% if @movie.reviews.length > 0 %>
+<!-- if reviews exist, display -->
+  <% @movie.reviews.each do |review| %>
+  <div class="review">
+    <p>Rating: <%= review.star_rating %>
+    <p>Reviewer: <%= review.user_id %></p>
+    <p><%= review.text %></p>
+    <p>Was this review helpful? | <a href="#">Yes</a> | <a href="#">No</a></p>
+    <p>This review has # upvotes and # downvotes</p>
+  </div>
+  <% end %>
+<!-- else, suggest they add a review -->
+<% else %>
+  <p>This movie hasn't been reviewed yet.</p>
+  <!-- debug path later -->
+
+
+<% end %>
+
+<%= link_to "Create New Review", new_movie_review_path(@movie) %>

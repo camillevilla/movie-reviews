@@ -1,0 +1,27 @@
+<div>
+<%= form_for @movie, url: {action: "create"} do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :year %><br>
+    <%= f.text_field :year %>
+  </p>
+  <p>
+    <%= f.label :director %><br>
+    <%= f.text_field :director %>
+  </p>
+  <p>
+    <%= f.label :mpaa_rating, "MPAA Rating" %><br>
+    <%= f.text_field :mpaa_rating %>
+  </p>
+  <p>
+    <%= f.label :genre %><br>
+    <%= f.collection_select :genres, Genre.all, :id, :name, prompt: true %>
+  </p>
+  <p>
+    <%= f.submit "Create New Movie"%><br>
+  </p>
+<% end %>
+</div>

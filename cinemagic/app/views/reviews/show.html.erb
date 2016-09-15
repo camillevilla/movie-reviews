@@ -1,0 +1,14 @@
+
+<nav>
+  <%= link_to @movie.title, movie_path(@movie) %>
+</nav>
+
+<p> <%= @review.text %> </p>
+
+<p>Stars: <%= @review.star_rating %> </p>
+
+
+<div>
+  <%= link_to "edit", edit_movie_review_path(@movie, @review) %>
+  <%= link_to "delete", movie_review_path(@movie, @review), method: :delete %>
+</div>
