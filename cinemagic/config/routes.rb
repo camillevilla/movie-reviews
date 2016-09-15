@@ -7,8 +7,6 @@ Rails.application.routes.draw do
 
   resources :genres
 
-  devise_for :models
-
   get 'sessions/new'
 
   get 'sessions/create'
