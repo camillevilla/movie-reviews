@@ -28,7 +28,7 @@ Jim Lengel
 - As a reviewer, I want to vote up a review so that that reviewer can become a trusted reviewer.
 
 - As a trusted reviewer, I want to have the same access as reviewer, as well as the below.
-- As a trusted reviewer, I want to suggest a new movie to be added to the database.
+- As a trusted reviewer, I want to add a new movie to be added to the database.
 
 - As an administrator, I want to have the same access as a trusted reviewer, as well as the below.
 - As as administrator, I want to add movies so that users and reviewers can see more movies.
