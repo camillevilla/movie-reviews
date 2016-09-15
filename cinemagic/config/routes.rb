@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  resources :genres
+
   devise_for :models
 
   get 'sessions/new'
