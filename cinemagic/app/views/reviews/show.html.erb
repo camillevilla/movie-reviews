@@ -3,17 +3,12 @@
   <%= link_to @movie.title, movie_path(@movie) %>
 </nav>
 
-<h1> <%= @article.title %> </h1>
+<p> <%= @review.text %> </p>
 
-<p> <%= @article.body %> </p>
-
-<p>Price: <%= @article.price %> </p>
-<p>Email: <%= @article.email %> </p>
-
-<%= image_tag(@article.picture, size: "400x400", alt: @article.picture) %>
+<p>Stars: <%= @review.star_rating %> </p>
 
 
 <div>
-  <%= link_to "edit", edit_category_article_path(@category, @article) %>
-  <%= link_to "delete", category_article_path(@category, @article), method: :delete %>
+  <%= link_to "edit", edit_movie_review_path(@movie, @review) %>
+  <%= link_to "delete", movie_review_path(@movie, @review), method: :delete %>
 </div>

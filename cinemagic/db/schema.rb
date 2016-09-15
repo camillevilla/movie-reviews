@@ -54,8 +54,7 @@ ActiveRecord::Schema.define(version: 20160914232857) do
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
     t.integer "movie_id"
-    t.string  "star_rating"
-    t.string  "integer"
+    t.integer "star_rating"
     t.text    "text"
     t.index ["movie_id"], name: "index_reviews_on_movie_id", using: :btree
     t.index ["user_id"], name: "index_reviews_on_user_id", using: :btree

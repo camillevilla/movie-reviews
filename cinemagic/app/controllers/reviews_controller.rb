@@ -3,12 +3,23 @@ class ReviewsController < ApplicationController
   def new
     @review = Review.new
     @movie = Movie.find(params[:movie_id])
+
   end
 
   def create
     @movie = Movie.find(params[:movie_id])
-    @review = @movie.reviews.create(review_params)
-
+    # this cromulent business is temporary; we hard-coded a user ID and inserted
+    # it into the hash that is passed into the create
+    review_params
+    cromulent = review_params
+    cromulent[:user_id] = 1
+      p "*"*55
+    p cromulent
+    @review = @movie.reviews.create(cromulent)
+    p "*"*55
+    p @review
+    p @movie
+    p "*"*55
 
     if @review.save
       redirect_to movie_review_path(@movie, @review)
@@ -47,7 +58,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:star_rating, :text, :movie_id, :user_id)
+    params.require(:review).permit(:star_rating, :text, :movie_id)
   end
 
 end
