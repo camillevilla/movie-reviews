@@ -1,0 +1,9 @@
+<h2>Browse by Genre</h2>
+
+<% @genres.each do |genre| %>
+  <div class="card">
+    <div class="card-block">
+      <h3>class="<%= genre.name %></h3>
+    </div>
+  </div>
+<% end %>
