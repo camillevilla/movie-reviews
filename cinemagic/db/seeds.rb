@@ -8,13 +8,12 @@
 require 'faker'
 
 User.delete_all
-Item.delete_all
-Bid.delete_all
+
 
 users = 100.times.map do
   User.create!( :username => Faker::Name.first_name,
                 :email      => Faker::Internet.email,
-                :password   => 'password' )
+                :password_hash   => 'password' )
 end
 
 
