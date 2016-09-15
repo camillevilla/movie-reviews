@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
     <title>Cinemagic</title>
@@ -9,6 +9,52 @@
   </head>
 
   <body>
+    <!-- Popup alerts -->
+  <% if notice %>
+       <p class="alert alert-success"><%= notice %></p>
+  <% end %>
+  <% if alert %>
+       <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+  <!-- Nav Bar  -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <%= link_to "Cinemagic", root_path, class: "navbar-brand" %>
+      <ul class="nav navbar-nav navbar-right">
+        <!-- This is where we will add new movie bar -->
+      <% if user_signed_in? %>
+          <li>
+            Logged in as <strong><%= current_user.email %></strong>.
+          </li>
+          <li>
+            <%= link_to "New Review", new_movie_path %>
+          </li>
+          <li>
+            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+          </li>
+          <li>
+            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+          </li>
+      <% else %>
+          <li>
+          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> 
+          </li>
+          <li>
+          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+          </li>
+      <% end %>
+      </ul>
+    </div>
+  </nav>
+  <p class="notice">
+    <%= notice  %>
+  </p>
+  <p class="alert">
+    <%= alert  %>
+  </p>
+
     <%= yield %>
   </body>
 </html>
+
+
