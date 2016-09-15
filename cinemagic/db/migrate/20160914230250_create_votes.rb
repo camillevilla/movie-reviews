@@ -1,9 +1,10 @@
 class CreateVotes < ActiveRecord::Migration[5.0]
   def change
     create_table :votes do |t|
-      t.integer :vote_value
+      t.integer :up_vote_value, default: 0
+      t.integer :down_vote_value, default: 0
       t.references :user
-      t.references :review, index: true, foreign_key: true
+      t.references :review
     end
   end
 end

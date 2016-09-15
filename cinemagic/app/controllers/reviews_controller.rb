@@ -22,7 +22,8 @@ class ReviewsController < ApplicationController
     p "*"*55
 
     if @review.save
-      redirect_to movie_review_path(@movie, @review)
+      redirect_to movie_path(@movie)
+      # redirect_to movie_review_path(@movie, @review)
     else
       render :new
     end
