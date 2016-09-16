@@ -12,6 +12,7 @@ class UserController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    # before_action :authenticate_user!
   end
 
 #This is to register a new user 
@@ -43,6 +44,7 @@ class UserController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    # before_action :authenticate_user!
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }

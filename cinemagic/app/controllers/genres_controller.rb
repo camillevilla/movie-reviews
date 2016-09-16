@@ -4,10 +4,12 @@ class GenresController < ApplicationController
   end
 
   def new
+    # before_action :authenticate_user!
     @genre = Genre.new
   end
 
   def create
+    # before_action :authenticate_user!
     @genre = Genre.new(genre_params)
 
     if @genre.save
@@ -23,6 +25,7 @@ class GenresController < ApplicationController
   end
 
   def destroy
+    # before_action :authenticate_user!
     @genre = Genre.find(params[:id])
 
     @genre.destroy

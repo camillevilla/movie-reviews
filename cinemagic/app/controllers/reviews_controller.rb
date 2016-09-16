@@ -1,12 +1,14 @@
 class ReviewsController < ApplicationController
 
   def new
+    # before_action :authenticate_user!
     @review = Review.new
     @movie = Movie.find(params[:movie_id])
 
   end
 
   def create
+    # before_action :authenticate_user!
     @movie = Movie.find(params[:movie_id])
     # this cromulent business is temporary; we hard-coded a user ID and inserted
     # it into the hash that is passed into the create
@@ -35,11 +37,13 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    # before_action :authenticate_user!
     @movie = Movie.find(params[:movie_id])
     @review = Review.find(params[:id])
   end
 
   def update
+    # before_action :authenticate_user!
     @movie = Movie.find(params[:movie_id])
     @review = Review.find(params[:id])
 
@@ -51,6 +55,7 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    # before_action :authenticate_user!
     @review = Review.find(params[:id])
     @movie = Movie.find(@review.movie_id)
 
