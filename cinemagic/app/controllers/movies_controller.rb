@@ -1,8 +1,19 @@
+require "themoviedb"
+
 class MoviesController < ApplicationController
 # Changed movie controller to singular
   def index
+    Tmdb::Api.key("38f294747ee749570b4e4b934ab5de83")
     @movies = Movie.all
     @genres = Genre.all
+    movie = params[:title]
+    @result = Tmdb::Movie.find(movie)
+    
+    # @search = Tmdb::Search.new
+    # @search.resource('movie')
+    # @search.query(@movie)
+    # @result = @search.fetch
+
   end
 
   def new
