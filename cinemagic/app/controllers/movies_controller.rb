@@ -1,7 +1,16 @@
+require 'themoviedb'
 class MoviesController < ApplicationController
   def welcome
     @movies = Movie.all
+    @movie = Movie.new
     @genres = Genre.all
+    @result = Tmdb::Movie.find("Batman")
+
+    # @search = Tmdb::Search.new
+    # @search.resource('movie')
+    # @search.query(@movie)
+    # @result = @search.fetch
+
   end
 
 
