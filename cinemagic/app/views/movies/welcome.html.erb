@@ -1,16 +1,23 @@
 <h1>Cinemagic</h1>
 <p>A reviews site for the discerning movie-goer.</p>
+
+<!-- Admin only -->
+<% if user_signed_in? %>
+  <h2>Contribute</h2>
+  <p>Help us make the Cinemagic community better:</p>
+  <ul>
+    <li><%= link_to "Add a movie to the collection", new_movie_path %></li>
+    <li><%= link_to "Add a review", movies_path %></li>
+    <li><%= link_to "Vote on user reviews", movies_path %></li>
+  </ul>
+<% end %>
+
 <h2>Latest Reviews</h2>
 <ul>
 <% @movies.each do |movie| %>
   <li> <%= link_to movie.title, movie_path(movie) %> (<%= movie.reviews.length %> reviews) </li>
 <% end %>
 </ul>
-
-<!-- Admin only -->
-<% if user_signed_in? %>
-  <button class="btn btn-secondary btn-lg"><%= link_to "Add New Movie", new_movie_path %></button>
-<% end %>
 <button class="btn btn-secondary btn-lg"><%= link_to "All Movies", movies_path %></button>
 
 <h2><%= link_to "Browse by Genre", genres_path %></h2>
