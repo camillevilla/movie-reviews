@@ -24,8 +24,16 @@
     <p>Rating: <%= review.star_rating %>
     <p>Reviewer: <%= review.user.username %></p>
     <p><%= review.text %></p>
-    <p>Was this review helpful? | <a href="#">Yes</a> | <a href="#">No</a></p>
-    <p>This review has <%= review.up_vote_sum %> upvotes and <%= review.down_vote_sum %> downvotes</p>
+
+    <!-- I changed the path from movie_review_votes_path to review_votes_path -->
+    <p>Was this review helpful? </p>
+
+
+    <!-- from http://docs.railsbridge.org/intro-to-rails/allow_people_to_vote -->
+    <%= pluralize(review.votes.count, "vote") %>
+    <%= button_to 'upvote', upvote_review_path(review), method: :post %>
+
+
   </div>
   <hr>
   <% end %>
