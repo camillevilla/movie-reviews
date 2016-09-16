@@ -7,22 +7,34 @@
 <% end %>
 </ul>
 
+<div id='Movie Search'>
+  <h1>Movie Search</h1>
+  <section id="fetch">
+      <input type="text" placeholder="Enter a movie title" id="term" width="40" />
+      <button id="search">Search</button>
+  </section>
+<div id='space'></div>
+<div id="Answer Container">
+  <section id="poster"></section>
+</div>
+
+</div>
+
 <!-- Admin only -->
 <% if user_signed_in? %>
   <button class="btn btn-secondary btn-lg"><%= link_to "Add New Movie", new_movie_path %></button>
 <% end %>
-<button class="btn btn-secondary btn-lg"><%= link_to "All Movies", movies_path %></button>
 
 <h2><%= link_to "Browse by Genre", genres_path %></h2>
 <!-- eventually limit the number of genres displayed on homepage? -->
 <div class="card-columns">
 <% @genres.each do |genre| %>
-  <div class="card text-xs-center">
-    <div class="card-block">
-      <h3 class="card-title"><%= link_to genre.name.titlecase, genre_path(genre) %></h3>
-      <%= image_tag "film.png" %>
+    <div class="card text-xs-center">
+      <div class="card-block">
+        <h3 class="card-title"><%= link_to genre.name.titlecase, genre_path(genre) %></h3>
+        
+      </div>
     </div>
-  </div>
 <% end %>
 </div>
 
