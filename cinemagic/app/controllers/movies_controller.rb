@@ -1,8 +1,12 @@
 class MoviesController < ApplicationController
-# Changed movie controller to singular
-  def index
+  def welcome
     @movies = Movie.all
     @genres = Genre.all
+  end
+
+
+  def index
+    @movies = Movie.all
   end
 
   def new
