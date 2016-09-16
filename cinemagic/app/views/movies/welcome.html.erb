@@ -20,6 +20,23 @@
 </ul>
 <button class="btn btn-secondary btn-lg"><%= link_to "All Movies", movies_path %></button>
 
+<div id='searcharea'>
+  <h1>Movie Search</h1>
+  <div id="search_movie">
+    <%= render 'movies/search', movie: @movie %>
+  </div>
+  <!-- <section id="fetch">
+      <input type="text" placeholder="Enter a movie title" id="term" width="40" />
+      <button id="search">Search</button>
+  </section> -->
+
+<div id='space'></div>
+<div id="Answer Container">
+  <section id="poster"></section>
+</div>
+
+</div>
+
 <h2><%= link_to "Browse by Genre", genres_path %></h2>
 <!-- eventually limit the number of genres displayed on homepage? -->
 <div class="card-columns">
