@@ -33,7 +33,18 @@
     <%= pluralize(review.votes.count, "vote") %>
     <%= button_to 'upvote', upvote_review_path(review), method: :post %>
 
-
+    <!-- comments -->
+    <% if review.comments.length > 0 %>
+    <h4>Comments</h4>
+    <% review.comments.each do |comment| %>
+      <div class="comment">
+      <p>
+        <%= comment.text%><br />
+        <%= comment.user.username %>
+      </p>
+      </div>
+    <% end %>
+    <% end %>
   </div>
   <hr>
   <% end %>
