@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   resources :genres
 
+  resources :users
+
   get 'sessions/new'
 
   get 'sessions/create'
