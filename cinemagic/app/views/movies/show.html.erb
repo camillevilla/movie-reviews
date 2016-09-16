@@ -24,7 +24,9 @@
     <p>Rating: <%= review.star_rating %>
     <p>Reviewer: <%= review.user.username %></p>
     <p><%= review.text %></p>
-    <p>Was this review helpful? | <a href="#">Yes</a> | <a href="#">No</a></p>
+    <p>Was this review helpful? | <%= link_to "yes", movie_review_votes_path(@movie, review, up_vote_value: 1, down_vote_value: 0), method: :post %>
+
+    <a href="#">Yes</a> | <a href="#">No</a></p>
     <p>This review has <%= review.up_vote_sum %> upvotes and <%= review.down_vote_sum %> downvotes</p>
   </div>
   <hr>

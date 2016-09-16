@@ -67,4 +67,15 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:star_rating, :text, :movie_id)
   end
 
+  def vote
+    @vote = Vote.new(params[:vote])
+    # user_id, review_id, up_vote_value, down_vote_value
+    if @vote.save
+      redirect_to movie_path(@movie, @vote)
+    else
+      p @vote
+      redirect_to movie_path(@movie, @vote)
+    end
+  end
+
 end
