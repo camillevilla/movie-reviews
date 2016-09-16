@@ -22,10 +22,10 @@
   <% @movie.reviews.each do |review| %>
   <div class="review">
     <p>Rating: <%= review.star_rating %>
-    <p>Reviewer: <%= review.user_id %></p>
+    <p>Reviewer: <%= review.user.username %></p>
     <p><%= review.text %></p>
     <p>Was this review helpful? | <a href="#">Yes</a> | <a href="#">No</a></p>
-    <p>This review has # upvotes and # downvotes</p>
+    <p>This review has <%= review.up_vote_sum %> upvotes and <%= review.down_vote_sum %> downvotes</p>
   </div>
   <hr>
   <% end %>
