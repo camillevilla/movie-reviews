@@ -2,9 +2,10 @@
 
 <div class="card-columns">
 <% @genres.each do |genre| %>
-  <div class="card">
+  <div class="card text-xs-center">
     <div class="card-block">
       <h3 class="card-title"><%= link_to genre.name.titlecase, genre_path(genre) %></h3>
+      <%= image_tag "film.png" %>
     </div>
   </div>
 <% end %>
