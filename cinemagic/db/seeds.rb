@@ -22,12 +22,8 @@ end
 
 
 #Test genres:
-Genre.create(name: "action")
-Genre.create(name: "comedy")
-Genre.create(name: "romantic")
-Genre.create(name: "drama")
-Genre.create(name: "horror")
-Genre.create(name: "western")
+test_genres = ["action", "comedy", "romantic", "drama", "horror", "western"]
+test_genres.each {|genre| Genre.create(name: genre)}
 
 # Small movie set for testing show view -
 Movie.create(
@@ -61,3 +57,108 @@ title:"Xala",
 year:1975,
 director:"Ousmane Sembène"
   )
+
+
+Movie.all.map {|movie| movie.genres << Genre.all.sample}
+
+# Minimum reviews
+6.times do
+  Review.create(
+    movie_id: 1,
+    user_id: rand(1..100),
+    text: Faker::Lorem.paragraph)
+end
+
+#bob
+75.times do
+  Vote.create(
+    review_id: 1,
+    user_id: rand(1..100),
+    up_vote_value: 1
+    )
+end
+25.times do
+  Vote.create(
+    review_id: 1,
+    user_id: rand(1..100),
+    down_vote_value: 1
+    )
+end
+
+#joe
+3.times do
+  Vote.create(
+    review_id: 2,
+    user_id: rand(1..100),
+    up_vote_value: 1
+    )
+end
+Vote.create(
+    review_id: 2,
+    user_id: rand(1..100),
+    down_vote_value: 1
+    )
+
+#jane
+10.times do
+  Vote.create(
+    review_id: 3,
+    user_id: rand(1..100),
+    up_vote_value: 1
+    )
+end
+10.times do
+  Vote.create(
+      review_id: 3,
+      user_id: rand(1..100),
+      down_vote_value: 1
+      )
+end
+
+#jim
+15.times do
+  Vote.create(
+    review_id: 4,
+    user_id: rand(1..100),
+    up_vote_value: 1
+    )
+end
+10.times do
+  Vote.create(
+      review_id: 4,
+      user_id: rand(1..100),
+      down_vote_value: 1
+      )
+end
+
+#julie
+10.times do
+  Vote.create(
+    review_id: 5,
+    user_id: rand(1..100),
+    up_vote_value: 1
+    )
+end
+20.times do
+  Vote.create(
+      review_id: 5,
+      user_id: rand(1..100),
+      down_vote_value: 1
+      )
+end
+
+#jessica
+200.times do
+  Vote.create(
+    review_id: 6,
+    user_id: rand(1..100),
+    up_vote_value: 1
+    )
+end
+50.times do
+  Vote.create(
+      review_id: 6,
+      user_id: rand(1..100),
+      down_vote_value: 1
+      )
+end
