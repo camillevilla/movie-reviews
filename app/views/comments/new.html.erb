@@ -1,0 +1,12 @@
+<div>
+<%= form_for @comment, url: {action: "create"}, params: { movie_id: 1, review_id: 1, user_id: 1 } do |f| %>
+  <p>
+    <%= f.label :text %><br>
+    <%= f.text_field :text %>
+  </p>
+  <p>
+    <%= f.submit "Add a Review"%><br>
+  </p>
+
+<% end %>
+</div>
