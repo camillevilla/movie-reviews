@@ -23,50 +23,52 @@ describe ReviewsController do
     end
   end
 
-  # describe "GET #new" do
-  #   it "responds with status code 200" do
-  #     get :new
-  #     expect(response).to have_http_status 200
-  #   end
+  describe "GET #new" do
+    it "responds with status code 200" do
+      get :new, { id: review.id, movie_id: movie.id }
+      expect(response).to have_http_status 200
+    end
 
-  #   it "assigns a new game to @game" do
-  #     get :new
-  #     expect(assigns(:game)).to be_a_new Game
-  #   end
+    it "assigns a new game to @review" do
+      get :new, { id: review.id, movie_id: movie.id }
+      expect(assigns(:review)).to be_a_new Review
+    end
 
-  #   it "renders the :new template" do
-  #     get :new
-  #     expect(response).to render_template(:new)
-  #   end
-  # end
+    it "renders the :new template" do
+      get :new, { id: review.id, movie_id: movie.id }
+      expect(response).to render_template(:new)
+    end
+  end
 
   # describe "POST #create" do
   #   context "when valid params are passed" do
   #     it "responds with status code 302" do
-  #       post :create, { game: { user_throw: "rock", computer_throw: "scissors" } }
+  #       post :create, { movie_id: movie.id }
+  #       post :create, { review: { user_id: 1, movie_id: 1, star_rating: 2, text: "Hello." }}
   #       expect(response).to have_http_status 302
   #     end
 
-  #     it "creates a new game in the database" do
-  #       expect {post :create, { game: { user_throw: "rock", computer_throw: "scissors" } }}.to change {Game.last.id}
+  #     it "creates a new review in the database" do
+  #       expect {post :create, { review: { user_id: 1, movie_id: 1, star_rating: 2, text: "Hello." } }}.to change {Review.last.id}
   #     end
 
-  #     it "assigns the newly created game as @game" do
-  #       post :create, { game: { user_throw: "rock", computer_throw: "scissors" }}
-  #       expect(assigns(:game)).to eq Game.last
+  #     it "assigns the newly created review as @review" do
+  #       post :create, { review: { user_id: 1, movie_id: 1, star_rating: 2, text: "Hello." }}
+  #       expect(assigns(:review)).to eq Review.last
   #     end
 
 
-  #     it "sets a notice that the game was successfully created" do
-  #       post :create, { game: { user_throw: "rock", computer_throw: "scissors" } }
-  #       expect(flash[:notice]).to match /Game was successfully created./
+  #     it "sets a notice that the review was successfully created" do
+  #       post :create, { review: { user_id: 1, movie_id: 1, star_rating: 2, text: "Hello." } }
+  #       expect(flash[:notice]).to match /Review was successfully created./
   #     end
 
-  #     it "redirects to the created game" do
-  #       post :create, { game: { user_throw: "rock", computer_throw: "scissors" } }
-  #       expect(response).to redirect_to(assigns(:game))
+  #     it "redirects to the created review" do
+  #       post :create, { review: { user_id: 1, movie_id: 1, star_rating: 2, text: "Hello." } }
+  #       expect(response).to redirect_to(assigns(:review))
   #     end
   #   end
+  # end
 
   #   context "when invalid params are passed" do
   #     it "responds with status code 200" do
