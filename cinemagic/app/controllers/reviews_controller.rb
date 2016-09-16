@@ -63,8 +63,29 @@ class ReviewsController < ApplicationController
     redirect_to movie_path(@movie)
   end
 
+  def upvote
+    @review = Review.find(params[:id])
+    @movie = Movie.find(@review.movie_id)
+    vote = @review.votes.create(user_id: @review.user_id)
+    vote.upvote
+
+    redirect_to(@movie)
+    # redirect_to(movie_reviews_path)
+  end
+
   def review_params
     params.require(:review).permit(:star_rating, :text, :movie_id)
+  end
+
+  def vote
+    @vote = Vote.new(params[:vote])
+    # user_id, review_id, up_vote_value, down_vote_value
+    if @vote.save
+      redirect_to movie_path(@movie, @vote)
+    else
+      p @vote
+      redirect_to movie_path(@movie, @vote)
+    end
   end
 
 end

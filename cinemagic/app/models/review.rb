@@ -17,6 +17,7 @@ class Review < ApplicationRecord
   def up_vote_sum
     upvotes_array = votes.map(&:up_vote_value)
     sum = upvotes_array.reduce(:+)
+
     if sum == nil
       return 0
     else

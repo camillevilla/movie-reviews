@@ -1,7 +1,6 @@
 require 'themoviedb'
 class MoviesController < ApplicationController
-# Changed movie controller to singular
-  def index
+  def welcome
     @movies = Movie.all
     @movie = Movie.new
     @genres = Genre.all
@@ -12,6 +11,11 @@ class MoviesController < ApplicationController
     # @search.query(@movie)
     # @result = @search.fetch
 
+  end
+
+
+  def index
+    @movies = Movie.all
   end
 
   def new
