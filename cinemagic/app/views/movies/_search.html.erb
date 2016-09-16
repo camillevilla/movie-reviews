@@ -1,13 +1,7 @@
 
-<%= form_for(@movie) do |f| %>
-  
+<form id='moviesearch' method='post' action='/api'>
+  <label>Movie Title</label>
+  <input id='movietitle' type='text' name='movie' value='movie' placeholder='title' >
+  <input name="search" type="submit" />
+</form>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>

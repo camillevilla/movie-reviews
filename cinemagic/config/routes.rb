@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :genres
 
+  resources :api
+
   get 'movies/search'
 
   get 'sessions/new'
