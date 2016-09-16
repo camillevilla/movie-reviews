@@ -9,10 +9,19 @@
 
 <div id='Movie Search'>
   <h1>Movie Search</h1>
-  <section id="fetch">
+  <!-- <section id="fetch">
       <input type="text" placeholder="Enter a movie title" id="term" width="40" />
       <button id="search">Search</button>
-  </section>
+  </section> -->
+<%=form_for :movies do |f| %>
+  <fieldset>
+    <legend>Movie Title</legend>
+    <%= f.label :movie %>
+    <%= f.text_field :movie,:size=>"45",:class=>"search",:id=>"mov" %><br/>      
+  </fieldset>
+  <p><%= button_to "save and continue",{:class=>"savebutton"} %></p>
+<%end%>
+
 <div id='space'></div>
 <div id="Answer Container">
   <section id="poster"></section>
