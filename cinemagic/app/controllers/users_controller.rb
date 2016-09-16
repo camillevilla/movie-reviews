@@ -1,21 +1,21 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-# We don't need users index 
+# We don't need users index
   # GET /users
   # GET /users.json
   # def index
   #   @users = User.all
   # end
 
-#This is the users profile page 
+#This is the users profile page
   # GET /users/1
   # GET /users/1.json
   def show
     # before_action :authenticate_user!
   end
 
-#This is to register a new user 
+#This is to register a new user
   # GET /users/new
   def new
     @user = User.new
