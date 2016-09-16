@@ -23,6 +23,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reviews do
+    resources :comments
+  end
+
   resources :votes
 
   resources :genres
