@@ -8,7 +8,9 @@
 </ul>
 
 <!-- Admin only -->
-<button class="btn btn-secondary btn-lg"><%= link_to "Add New Movie", new_movie_path %></button>
+<% if user_signed_in? %>
+  <button class="btn btn-secondary btn-lg"><%= link_to "Add New Movie", new_movie_path %></button>
+<% end %>
 <button class="btn btn-secondary btn-lg"><%= link_to "All Movies", movies_path %></button>
 
 <h2><%= link_to "Browse by Genre", genres_path %></h2>
